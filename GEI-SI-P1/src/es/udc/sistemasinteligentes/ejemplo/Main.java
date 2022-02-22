@@ -7,10 +7,10 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         ProblemaAspiradora.EstadoAspiradora estadoInicial = new ProblemaAspiradora.EstadoAspiradora(ProblemaAspiradora.EstadoAspiradora.PosicionRobot.IZQ,
-                                                                                                    ProblemaAspiradora.EstadoAspiradora.PosicionBasura.AMBAS);
-        ProblemaBusqueda aspiradora = new ProblemaAspiradora(estadoInicial);
+                                                                                                    ProblemaAspiradora.EstadoAspiradora.PosicionBasura.AMBAS);//definimos un estado inicial
+        ProblemaBusqueda aspiradora = new ProblemaAspiradora(estadoInicial);//creamos un nuevo problemabusqueda con nuestro estado inicial
 
-        EstrategiaBusqueda buscador = new Estrategia4();
+        EstrategiaBusqueda buscador = new Estrategia4();//resolvemos
         System.out.println(buscador.soluciona(aspiradora));
     }
 }
