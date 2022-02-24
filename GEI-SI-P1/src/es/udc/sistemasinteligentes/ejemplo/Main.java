@@ -2,6 +2,9 @@ package es.udc.sistemasinteligentes.ejemplo;
 
 import es.udc.sistemasinteligentes.EstrategiaBusqueda;
 import es.udc.sistemasinteligentes.ProblemaBusqueda;
+import es.udc.sistemasinteligentes.Nodo;
+
+import java.util.Arrays;
 
 public class Main {
 
@@ -11,6 +14,9 @@ public class Main {
         ProblemaBusqueda aspiradora = new ProblemaAspiradora(estadoInicial);//creamos un nuevo problemabusqueda con nuestro estado inicial
 
         EstrategiaBusqueda buscador = new Estrategia4();//resolvemos
-        System.out.println(buscador.soluciona(aspiradora));
+        Nodo[] nodos= buscador.soluciona(aspiradora);
+        for (Nodo n: nodos) {
+            System.out.println(n.toString());
+        }
     }
 }

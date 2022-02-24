@@ -10,9 +10,10 @@ public class Estrategia4 implements EstrategiaBusqueda {
     }
 
     @Override
-    public Estado soluciona(ProblemaBusqueda p) throws Exception{
+    public Nodo[] soluciona(ProblemaBusqueda p) throws Exception{
         ArrayList<Estado> explorados = new ArrayList<Estado>();//guarda una lista de explorados
         Estado estadoActual = p.getEstadoInicial();//mira el estado inicial
+        Nodo nodoActual= new Nodo(estadoActual,null,null);
         explorados.add(estadoActual);
 
         int i = 1;
@@ -25,10 +26,12 @@ public class Estrategia4 implements EstrategiaBusqueda {
             boolean modificado = false;
             for (Accion acc: accionesDisponibles) {//para cada accion
                 Estado sc = p.result(estadoActual, acc);
+                Nodo padre= nodoActual;
                 System.out.println((i++) + " - RESULT(" + estadoActual + ","+ acc + ")=" + sc);
                 if (!explorados.contains(sc)) {//si no lo exploramos
                     estadoActual = sc;
                     System.out.println((i++) + " - " + sc + " NO explorado");
+                    nodoActual= new Nodo(sc,padre,acc);
                     explorados.add(estadoActual);
                     modificado = true;
                     System.out.println((i++) + " - Estado actual cambiado a " + estadoActual);
@@ -40,6 +43,6 @@ public class Estrategia4 implements EstrategiaBusqueda {
             if (!modificado) throw new Exception("No se ha podido encontrar una solución");//sino lo exploramos da error
         }
         System.out.println((i++) + " - FIN - " + estadoActual);
-        return estadoActual;
+        return Nodo.reconstruyeSolucion(nodoActual);
     }
 }

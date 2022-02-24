@@ -9,34 +9,6 @@ import es.udc.sistemasinteligentes.Nodo;
 import java.util.ArrayList;
 
 public class ProblemaAspiradora extends ProblemaBusqueda {
-   /* public static class NodoAspiradora extends Nodo{
-        private EstadoAspiradora estado;
-        private NodoAspiradora padre;
-        private AccionAspiradora accion;
-        public NodoAspiradora(Estado e, Nodo p, Accion a){
-            this.estado=(EstadoAspiradora) e;
-            this.padre = (NodoAspiradora) p;
-            this.accion = (AccionAspiradora) a;
-
-        }
-
-        @Override
-        public static Nodo CrearNodo(Estado e, Nodo p, Accion a) {
-            return new NodoAspiradora(e,p,a);
-        }
-
-        @Override
-        public ArrayList<Nodo> Sucesores(Estado e, ProblemaBusqueda p) {
-            ArrayList<Nodo> sucesores= new ArrayList<Nodo>();
-            Accion[] accionesDisponibles =p.acciones(e);//preguntar si esto es valido lo de pasar ProblemaBusqueda como parametro p
-            for(Accion acc: accionesDisponibles){
-                sucesores.add(new NodoAspiradora(acc.aplicaA(e),this,acc));
-            }
-            return sucesores;
-        }
-
-
-    }*/
     public static class EstadoAspiradora extends Estado {
         public enum PosicionRobot {IZQ, DER};
         public enum PosicionBasura {AMBAS, DER, IZQ, NINGUNA};
