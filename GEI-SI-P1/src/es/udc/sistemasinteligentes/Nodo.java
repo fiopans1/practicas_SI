@@ -3,6 +3,7 @@ package es.udc.sistemasinteligentes;
 import es.udc.sistemasinteligentes.ejemplo.ProblemaAspiradora;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Nodo {
     private final Estado estado;
@@ -15,12 +16,14 @@ public class Nodo {
 
 
     }
-    public ArrayList<Nodo> Sucesores(Estado e, Accion[] accionesDisponibles){
+    public static Nodo[] Sucesores(Estado e,Nodo p, Accion[] accionesDisponibles){
         ArrayList<Nodo> sucesores= new ArrayList<Nodo>();
         for(Accion acc: accionesDisponibles){
-            sucesores.add(new Nodo(acc.aplicaA(e),this,acc));
+            sucesores.add(new Nodo(acc.aplicaA(e),p,acc));
         }
-        return sucesores;
+        Nodo[] arraysolucion= new Nodo[sucesores.size()];
+        sucesores.toArray(arraysolucion);
+        return arraysolucion;
     }
 
     public Accion getAccion() {
