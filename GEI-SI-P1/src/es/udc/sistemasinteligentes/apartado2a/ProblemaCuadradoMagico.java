@@ -47,12 +47,10 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
     }
     public static class AccionCuadrado extends Accion{
         private int x,y,valor;
-        int [][] estadoInicial;
-        public AccionCuadrado(int x,int y,int valor, int[][] estadoInicial){
+        public AccionCuadrado(int x,int y,int valor){
             this.x=x;
             this.y=y;
             this.valor=valor;
-            this.estadoInicial=estadoInicial;
         }
         @Override
         public String toString() {
@@ -63,9 +61,7 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
         public boolean esAplicable(Estado es) {
             EstadoCuadrado esAs= (EstadoCuadrado)es;
             if(esAs.estado[x][y]!=0){
-                if(esAs.estado[x][y]!=valor){
-                    return false;
-                }
+                return false;
 
             }
             return true;
@@ -92,6 +88,7 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
         int diag=0,diag1=0;
         int cumplir=(((prub.length)*(prub.length*prub.length+1))/2);
         int z=prub.length;
+        int limit= (int)Math.pow(prub.length,2);
         for(int i=0;i<prub.length;i++){
             diag+=prub[i][i];
         }
@@ -114,6 +111,9 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
             diag=0;
             diag1=0;
             for(int j=0;j<prub[i].length;j++){
+                if(1>prub[i][j] || prub[i][j]>limit){
+                    return false;
+                }
                 diag+=prub[i][j];
                 diag1+=prub[j][1];
             }
@@ -128,6 +128,32 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
 
     @Override
     public Accion[] acciones(Estado es) {
+        int x=0,y=0;
+        boolean encontrado=false;
+        EstadoCuadrado esAs= (EstadoCuadrado) es;
+        ArrayList<AccionCuadrado> accs= new ArrayList<>();
+        int [][] estado= esAs.estado;
+        int lim= (int)Math.pow(estado.length,2);
+        for(int i=0;i< estado.length;i++){
+            for(int j=0;j< estado[i].length;j++){
+                if(estado[i][j]==0 && !encontrado){
+                    x=i;
+                    y=j;
+                    encontrado=true;
+
+                }
+            }
+        }
+        if(!encontrado){
         return new Accion[0];
+        }else{
+            for(int i=1;i<= lim;i++){
+                accs.add(new AccionCuadrado(x,y,i));
+            }
+        }
+        Accion[] accs1= new Accion[accs.size()];
+        accs.toArray(accs1);
+        return accs1;
     }
+
 }
