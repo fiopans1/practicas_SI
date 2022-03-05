@@ -15,6 +15,7 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
         @Override
         public String toString() {
             StringBuilder sol=new StringBuilder();
+            sol.append("\n");
             for(int i=0;i<estado.length;i++){
                 sol.append("[");
                 for(int j=0;j<estado[i].length;j++){
@@ -70,7 +71,13 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
         @Override
         public Estado aplicaA(Estado es) {
             EstadoCuadrado esAs= (EstadoCuadrado)es;
-            int [][] est= esAs.estado;
+            int[][] estado= esAs.estado;
+            int [][] est= new int[estado.length][estado.length];
+            for(int i=0;i<estado.length;i++){
+                for(int j=0;j<estado[i].length;j++){
+                    est[i][j]=estado[i][j];
+                }
+            }
             est[x][y]=valor;
             return new EstadoCuadrado(est);
         }
