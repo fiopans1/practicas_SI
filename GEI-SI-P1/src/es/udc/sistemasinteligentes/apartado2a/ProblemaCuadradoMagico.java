@@ -91,7 +91,7 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
         int [][] prub= esAs.estado;
         int diag=0,diag1=0;
         int cumplir=(((prub.length)*(prub.length*prub.length+1))/2);
-        int z=prub.length-1;
+        int z=prub.length;
         for(int i=0;i<prub.length;i++){
             diag+=prub[i][i];
         }
@@ -100,7 +100,7 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
         }
         diag=0;
         for(int i=0;i<prub.length;i++){
-            if(z>=0){
+            if(z>0){
                 z--;
             }
 
