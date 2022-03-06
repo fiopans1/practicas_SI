@@ -134,7 +134,7 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
     }
 
     @Override
-    public Accion[] acciones(Estado es) {
+    public Accion[] acciones(Estado es) {//mejorar esto(no hace falta generar estados que no son posibles)
         int x=0,y=0;
         boolean encontrado=false;
         EstadoCuadrado esAs= (EstadoCuadrado) es;
