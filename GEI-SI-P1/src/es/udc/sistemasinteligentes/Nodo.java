@@ -5,14 +5,24 @@ import es.udc.sistemasinteligentes.ejemplo.ProblemaAspiradora;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Nodo {
+public class Nodo implements Comparable<Nodo>{
     private final Estado estado;
     private final Accion accion;
     private final Nodo padre;
+    private final float coste;
     public Nodo(Estado e, Nodo p, Accion a){
         this.estado=e;
         this.padre=p;
         this.accion=a;
+        this.coste=0;
+
+
+    }
+    public Nodo(Estado e, Nodo p, Accion a, float coste){
+        this.estado=e;
+        this.padre=p;
+        this.accion=a;
+        this.coste=coste;
 
 
     }
@@ -66,5 +76,10 @@ public class Nodo {
                 ", estado padre=" + padre.getEstado() +
 
                 '}';
+    }
+
+    @Override
+    public int compareTo(Nodo o) {
+        return (int) (this.coste-o.coste);
     }
 }

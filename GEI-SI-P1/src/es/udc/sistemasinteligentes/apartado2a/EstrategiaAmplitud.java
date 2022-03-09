@@ -1,8 +1,6 @@
 package es.udc.sistemasinteligentes.apartado2a;
 
-import es.udc.sistemasinteligentes.EstrategiaBusqueda;
-import es.udc.sistemasinteligentes.Nodo;
-import es.udc.sistemasinteligentes.ProblemaBusqueda;
+import es.udc.sistemasinteligentes.*;
 
 import java.util.ArrayList;
 
@@ -10,7 +8,7 @@ public class EstrategiaAmplitud implements EstrategiaBusqueda {
     @Override
     public Nodo[] soluciona(ProblemaBusqueda p) throws Exception {
         ArrayList<Nodo> Frontera= new ArrayList<>();//se utilizará como una cola FIFO
-        ArrayList<Nodo> Explorados= new ArrayList<>();
+        ArrayList<Estado> Explorados= new ArrayList<>();
         Nodo nodoActual= new Nodo(p.getEstadoInicial(),null,null);
         Nodo[] H;
         int i=1;
@@ -19,7 +17,7 @@ public class EstrategiaAmplitud implements EstrategiaBusqueda {
             nodoActual=Frontera.get(0);
             Frontera.remove(0);
             System.out.println((i++) + " - Estado actual cambiado a " + nodoActual.getEstado());
-            Explorados.add(nodoActual);
+            Explorados.add(nodoActual.getEstado());
             H = Nodo.Sucesores(nodoActual.getEstado(), nodoActual, p.acciones(nodoActual.getEstado()));
             for (Nodo h : H) {//añadimos cada uno de los sucesores a la solucion
                 boolean pertenece = false;
@@ -28,12 +26,12 @@ public class EstrategiaAmplitud implements EstrategiaBusqueda {
                     return Nodo.reconstruyeSolucion(h);
                 }else {
                     System.out.println((i++) + " - " + nodoActual.getEstado() + " no es meta");
-                    for (Nodo n : Explorados) {
-                        if (h.getEstado().equals(n.getEstado())) {
-                            System.out.println((i++) + " - " + h.getEstado() + " ya explorado");
-                            pertenece = true;
-                        }
+
+                    if (Explorados.contains(h.getEstado())) {
+                        System.out.println((i++) + " - " + h.getEstado() + " ya explorado");
+                        pertenece = true;
                     }
+
                     if (!pertenece) {
                         for (Nodo n : Frontera) {
                             if (h.getEstado().equals(n.getEstado())) {
