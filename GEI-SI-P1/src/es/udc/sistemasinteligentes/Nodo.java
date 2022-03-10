@@ -9,23 +9,22 @@ public class Nodo implements Comparable<Nodo>{
     private final Estado estado;
     private final Accion accion;
     private final Nodo padre;
-    private final float coste;
+    private float coste;
+    private float funcion;
     public Nodo(Estado e, Nodo p, Accion a){
         this.estado=e;
         this.padre=p;
         this.accion=a;
-        this.coste=0;
 
 
     }
-    public Nodo(Estado e, Nodo p, Accion a, float coste){
-        this.estado=e;
-        this.padre=p;
-        this.accion=a;
+    public void setCoste(float Coste){
         this.coste=coste;
-
-
     }
+    public void setFuncion(float funcion){
+        this.funcion=funcion;
+    }
+
     public static Nodo[] Sucesores(Estado e,Nodo p, Accion[] accionesDisponibles){
         ArrayList<Nodo> sucesores= new ArrayList<Nodo>();
         for(Accion acc: accionesDisponibles){
@@ -47,6 +46,15 @@ public class Nodo implements Comparable<Nodo>{
     public Nodo getPadre() {
         return padre;
     }
+
+    public float getCoste() {
+        return coste;
+    }
+
+    public float getF() {
+        return funcion;
+    }
+
     public static Nodo[] reconstruyeSolucion(Nodo n){
         ArrayList<Nodo> solucion = new ArrayList<Nodo>();
         Nodo nodoactual= n;
@@ -80,6 +88,6 @@ public class Nodo implements Comparable<Nodo>{
 
     @Override
     public int compareTo(Nodo o) {
-        return (int) (this.coste-o.coste);
+        return (int) (this.funcion-o.funcion);
     }
 }

@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class ProblemaCuadradoMagico extends ProblemaBusqueda{
     public static class EstadoCuadrado extends Estado{
-        private int [][] estado;
+        private final int [][] estado;
         public EstadoCuadrado(int [][] estado){
             this.estado=estado;
 
@@ -25,6 +25,10 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
                 sol.append("]\n");
             }
             return sol.toString();
+        }
+
+        public int[][] getEstado() {
+            return estado;
         }
 
         @Override
@@ -155,7 +159,7 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
         int cntfil=0, cntcol=0;
         for(int i=0;i<estado.length;i++){
             for(int j=0;j< estado[i].length;j++){
-                if(estado[i][j]==0 && !encontrado){
+                if(estado[i][j]==0 && !encontrado){//a lo mejor cambiar para que me genere todos los 0 desde un estado(y esta sea la version optimizada)
                     x=i;
                     y=j;
                     encontrado=true;
