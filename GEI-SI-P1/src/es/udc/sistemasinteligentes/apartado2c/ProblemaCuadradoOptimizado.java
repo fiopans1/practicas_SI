@@ -1,12 +1,14 @@
-package es.udc.sistemasinteligentes.apartado2a;
-import es.udc.sistemasinteligentes.*;
+package es.udc.sistemasinteligentes.apartado2c;
+
+import es.udc.sistemasinteligentes.Accion;
+import es.udc.sistemasinteligentes.Estado;
+import es.udc.sistemasinteligentes.ProblemaBusqueda;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
-public class ProblemaCuadradoMagico extends ProblemaBusqueda{
-    public static class EstadoCuadrado extends Estado{
+public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
+    public static class EstadoCuadrado extends Estado {
         private final int [][] estado;
         public EstadoCuadrado(int [][] estado){
             this.estado=estado;
@@ -51,7 +53,7 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
             return Objects.hash(estado);
         }
     }
-    public static class AccionCuadrado extends Accion{
+    public static class AccionCuadrado extends Accion {
         private int x,y,valor;
         public AccionCuadrado(int x,int y,int valor){
             this.x=x;
@@ -88,7 +90,7 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
         }
     }
 
-    public ProblemaCuadradoMagico(Estado estadoInicial) {
+    public ProblemaCuadradoOptimizado(Estado estadoInicial) {
         super(estadoInicial);
     }
 
@@ -127,7 +129,7 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
                     return false;
                 }
                 diag+=prub[i][j];
-                diag1+=prub[j][i];
+                diag1+=prub[j][1];
             }
             if(diag!=cumplir || diag1!=cumplir){
                 return false;
@@ -137,6 +139,16 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
 
         return true;
     }
+    private boolean contiene(int[][] arr, int z){
+        for(int i=0;i<arr.length;i++){
+            for(int j=0; j<arr[i].length;j++){
+                if(arr[i][j]==z){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     @Override
     public Accion[] acciones(Estado es) {//mejorar esto(no hace falta generar estados que no son posibles)
         int x=0,y=0;
@@ -144,10 +156,12 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
         EstadoCuadrado esAs= (EstadoCuadrado) es;
         ArrayList<AccionCuadrado> accs= new ArrayList<>();
         int [][] estado= esAs.estado;
+        int form= (int) (estado.length*(Math.pow(estado.length,2)+1))/2;
         int lim= (int)Math.pow(estado.length,2);
-        for(int i=0;i< estado.length;i++){
+        int cntfil=0, cntcol=0;
+        for(int i=0;i<estado.length;i++){
             for(int j=0;j< estado[i].length;j++){
-                if(estado[i][j]==0 && !encontrado){
+                if(estado[i][j]==0 && !encontrado){//a lo mejor cambiar para que me genere todos los 0 desde un estado(y esta sea la version optimizada)
                     x=i;
                     y=j;
                     encontrado=true;
@@ -158,13 +172,20 @@ public class ProblemaCuadradoMagico extends ProblemaBusqueda{
         if(!encontrado){
             return new Accion[0];
         }else{
-            for(int i=1;i<= lim;i++){
-                accs.add(new AccionCuadrado(x,y,i));
+            for(int i=0;i< estado.length;i++){
+                cntfil+=estado[x][i];
+                cntcol+=estado[i][y];
             }
+            for (int i = 1; i <= lim && i<=(form-cntfil) && i<=(form-cntcol); i++) {
+                if(!contiene(estado,i)) {
+                    accs.add(new AccionCuadrado(x, y, i));
+                }
+            }
+            Accion[] accs1= new Accion[accs.size()];
+            accs.toArray(accs1);
+            return accs1;
         }
-        Accion[] accs1= new Accion[accs.size()];
-        accs.toArray(accs1);
-        return accs1;
     }
 
 }
+

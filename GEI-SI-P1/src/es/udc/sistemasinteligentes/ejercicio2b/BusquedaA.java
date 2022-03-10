@@ -49,7 +49,7 @@ public class BusquedaA implements EstrategiaBusquedaInformada {
                         }
                     }
                     if (!pertenece) {
-                        System.out.println((i++) + " - " + nh.getEstado() + " NO explorado");
+                        //System.out.println((i++) + " - " + nh.getEstado() + " NO explorado");
                         Frontera.add(nh);
                     }
 

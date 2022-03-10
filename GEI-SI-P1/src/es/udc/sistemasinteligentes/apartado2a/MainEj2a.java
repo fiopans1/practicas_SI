@@ -4,7 +4,7 @@ import es.udc.sistemasinteligentes.*;
 
 public class MainEj2a {
     public static void main(String[] args) throws Exception {
-        int[][] est = {{2, 0, 0}, {0, 0, 0},{0, 0, 0}};
+        int[][] est = {{4, 9, 2}, {3, 5, 0},{0, 1, 0}};
         ProblemaCuadradoMagico.EstadoCuadrado estadoInicial = new ProblemaCuadradoMagico.EstadoCuadrado(est);//definimos un estado inicial
         ProblemaBusqueda cuadradoMagico = new ProblemaCuadradoMagico(estadoInicial);//creamos un nuevo problema busqueda con nuestro estado inicial
 
