@@ -1,8 +1,7 @@
-package es.udc.sistemasinteligentes.ejercicio2b;
+package es.udc.sistemasinteligentes.apartado2b;
 
 import es.udc.sistemasinteligentes.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 

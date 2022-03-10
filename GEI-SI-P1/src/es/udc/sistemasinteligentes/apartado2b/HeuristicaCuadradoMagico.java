@@ -1,4 +1,4 @@
-package es.udc.sistemasinteligentes.ejercicio2b;
+package es.udc.sistemasinteligentes.apartado2b;
 
 import es.udc.sistemasinteligentes.Estado;
 import es.udc.sistemasinteligentes.Heuristica;

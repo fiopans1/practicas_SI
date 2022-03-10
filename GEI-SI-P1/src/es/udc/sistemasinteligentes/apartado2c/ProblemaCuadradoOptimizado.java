@@ -150,7 +150,7 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
         return false;
     }
     @Override
-    public Accion[] acciones(Estado es) {//mejorar esto(no hace falta generar estados que no son posibles)
+    public Accion[] acciones(Estado es) {//optimizamos el generar acciones
         int x=0,y=0;
         boolean encontrado=false;
         EstadoCuadrado esAs= (EstadoCuadrado) es;
@@ -161,7 +161,7 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
         int cntfil=0, cntcol=0;
         for(int i=0;i<estado.length;i++){
             for(int j=0;j< estado[i].length;j++){
-                if(estado[i][j]==0 && !encontrado){//a lo mejor cambiar para que me genere todos los 0 desde un estado(y esta sea la version optimizada)
+                if(estado[i][j]==0 && !encontrado){
                     x=i;
                     y=j;
                     encontrado=true;
