@@ -13,7 +13,7 @@ public class MainEj2a {
         EstrategiaBusqueda buscador = new EstrategiaProfundidad();//busqueda en profundidad
 
         Nodo[] nodos = buscador.soluciona(cuadradoMagico);
-        for (Nodo n : nodos) {
+        for (Nodo n : nodos) {//imprimimos los nodos que recorrimos
             System.out.println(n.toString());
         }
     }

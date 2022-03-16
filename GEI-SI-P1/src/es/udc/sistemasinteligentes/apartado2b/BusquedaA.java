@@ -7,7 +7,8 @@ import java.util.PriorityQueue;
 
 public class BusquedaA implements EstrategiaBusquedaInformada {
     @Override
-    public Nodo[] soluciona(ProblemaBusqueda p, Heuristica h) throws Exception {
+    public Nodo[] soluciona(ProblemaBusqueda p, Heuristica h) throws Exception {//implemetacion del algoritmo de busqueda A*
+        //primero declaramos una cola de prioridad para la frontera, y una lista de estados para Explorados
         PriorityQueue<Nodo> Frontera= new PriorityQueue<>();
         ArrayList<Estado> Explorados= new ArrayList<>();
         Nodo nodoActual= new Nodo(p.getEstadoInicial(),null,null);
@@ -17,13 +18,13 @@ public class BusquedaA implements EstrategiaBusquedaInformada {
         Nodo[] H;
         float cn;
         while(!Frontera.isEmpty()){
-            nodoActual=Frontera.remove();
+            nodoActual=Frontera.remove();//quitamos el primer nodod e frontera
             S=nodoActual.getEstado();
             System.out.println((i++) + " - Estado actual cambiado a " + S);
-            if(p.esMeta(S)){
+            if(p.esMeta(S)){//miramos si el estado es meta
                 System.out.println((i++) + " - FIN - " + nodoActual.getEstado());
                 return Nodo.reconstruyeSolucion(nodoActual);
-            }else{
+            }else{//si el estado no es meta generamos sucesores y miramos si se añaden a frontera o no
                 Explorados.add(S);
                 H=Nodo.Sucesores(S,nodoActual,p.acciones(S));
                 for(Nodo nh : H){
@@ -47,7 +48,7 @@ public class BusquedaA implements EstrategiaBusquedaInformada {
                             }
                         }
                     }
-                    if (!pertenece) {
+                    if (!pertenece) {//si el estado no esta ni en frontera ni en explorados lo añadimos a frontera
                         //System.out.println((i++) + " - " + nh.getEstado() + " NO explorado");
                         Frontera.add(nh);
                     }

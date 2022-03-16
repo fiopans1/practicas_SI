@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
+    //es igual al del 2a menos el Accion[] de ProblemaBusqueda que es donde hacemos los cambios!
     public static class EstadoCuadrado extends Estado {
         private final int [][] estado;
         public EstadoCuadrado(int [][] estado){
@@ -135,6 +136,11 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
                 return false;
             }
         }
+        for(int i=1;i<=(prub.length* prub.length);i++){
+            if(!contiene(prub,i)){
+                return false;
+            }
+        }
 
 
         return true;
@@ -176,9 +182,12 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
                 cntfil+=estado[x][i];
                 cntcol+=estado[i][y];
             }
-            for (int i = 1; i <= lim && i<=(form-cntfil) && i<=(form-cntcol); i++) {
-                if(!contiene(estado,i)) {
-                    accs.add(new AccionCuadrado(x, y, i));
+
+            for (int i = 1; i <= lim && i<=(form-cntfil) && i<=(form-cntcol); i++) {//tenemos como condicion que el limite sea menor que lo que falta para completar la fila/columna
+                if(!contiene(estado,i)) {//miramos que no se repita ningun numero en la matriz
+                    AccionCuadrado acc=new AccionCuadrado(x, y, i);
+                    if(acc.esAplicable(es))
+                    accs.add(acc);
                 }
             }
             Accion[] accs1= new Accion[accs.size()];

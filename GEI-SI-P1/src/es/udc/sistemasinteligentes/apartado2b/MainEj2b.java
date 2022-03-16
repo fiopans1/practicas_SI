@@ -9,8 +9,8 @@ public class MainEj2b {
         ProblemaCuadradoMagico.EstadoCuadrado estadoInicial = new ProblemaCuadradoMagico.EstadoCuadrado(est);//definimos un estado inicial
         ProblemaBusqueda cuadradoMagico = new ProblemaCuadradoMagico(estadoInicial);//creamos un nuevo problema busqueda con nuestro estado inicial
 
-        EstrategiaBusquedaInformada buscador = new BusquedaA();
-        Heuristica h=new HeuristicaCuadradoMagico();
+        EstrategiaBusquedaInformada buscador = new BusquedaA();//creamos el algoritmo de busqueda
+        Heuristica h=new HeuristicaCuadradoMagico();//creamos la heuristica
         Nodo[] nodos = buscador.soluciona(cuadradoMagico,h);
         for (Nodo n : nodos) {
             System.out.println(n.toString());

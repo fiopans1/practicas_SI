@@ -13,9 +13,9 @@ public class Main {
                                                                                                     ProblemaAspiradora.EstadoAspiradora.PosicionBasura.AMBAS);//definimos un estado inicial
         ProblemaBusqueda aspiradora = new ProblemaAspiradora(estadoInicial);//creamos un nuevo problemabusqueda con nuestro estado inicial
 
-
-        EstrategiaBusqueda buscador = new Estrategia4();//resolvemos
-        //EstrategiaBusqueda buscador = new EstrategiaBusquedaGrafo();//resolvemos
+        //descomenta la estrategia que quieres usar y comenta la otra
+        EstrategiaBusqueda buscador = new Estrategia4();//opcion 1
+        //EstrategiaBusqueda buscador = new EstrategiaBusquedaGrafo();//opcion 2
         Nodo[] nodos= buscador.soluciona(aspiradora);
         for (Nodo n: nodos) {
             System.out.println(n.toString());

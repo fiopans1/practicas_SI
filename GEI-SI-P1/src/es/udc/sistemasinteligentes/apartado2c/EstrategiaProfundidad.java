@@ -7,7 +7,7 @@ import java.util.Stack;
 public class EstrategiaProfundidad implements EstrategiaBusqueda {
 
     @Override
-    public Nodo[] soluciona(ProblemaBusqueda p) throws Exception {
+    public Nodo[] soluciona(ProblemaBusqueda p) throws Exception {//exactamente la misma que en el 2a
         Stack<Nodo> Frontera = new Stack<>();
         int i = 0;
         ArrayList<Estado> Explorados = new ArrayList<>();
