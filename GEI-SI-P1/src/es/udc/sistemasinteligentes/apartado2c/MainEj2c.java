@@ -1,6 +1,8 @@
 package es.udc.sistemasinteligentes.apartado2c;
 
 import es.udc.sistemasinteligentes.*;
+import es.udc.sistemasinteligentes.apartado2b.BusquedaA;
+import es.udc.sistemasinteligentes.apartado2b.HeuristicaCuadradoMagico;
 
 public class MainEj2c {
     public static void main(String[] args) throws Exception {

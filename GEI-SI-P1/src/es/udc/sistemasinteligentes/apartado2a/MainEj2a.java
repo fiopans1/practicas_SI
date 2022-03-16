@@ -9,8 +9,8 @@ public class MainEj2a {
         ProblemaBusqueda cuadradoMagico = new ProblemaCuadradoMagico(estadoInicial);//creamos un nuevo problema busqueda con nuestro estado inicial
 
         //comenta y descomenta la que quieras usar:
-        //EstrategiaBusqueda buscador = new EstrategiaAmplitud();
-        EstrategiaBusqueda buscador = new EstrategiaProfundidad();
+        //EstrategiaBusqueda buscador = new EstrategiaAmplitud();//busqueda en amplitud
+        EstrategiaBusqueda buscador = new EstrategiaProfundidad();//busqueda en profundidad
 
         Nodo[] nodos = buscador.soluciona(cuadradoMagico);
         for (Nodo n : nodos) {
