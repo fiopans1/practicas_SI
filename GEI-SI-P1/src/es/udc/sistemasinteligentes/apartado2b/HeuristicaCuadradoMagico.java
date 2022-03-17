@@ -77,7 +77,7 @@ public class HeuristicaCuadradoMagico extends Heuristica {//mañana buscar una q
                 return 100000;
             }
         }
-        return sum;
+        return sum;//si el estado es posible devolvemos el numero de casillas en blanco
 
     }
 }
