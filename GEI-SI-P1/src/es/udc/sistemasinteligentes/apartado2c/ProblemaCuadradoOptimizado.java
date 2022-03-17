@@ -130,7 +130,7 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
                     return false;
                 }
                 diag+=prub[i][j];
-                diag1+=prub[j][1];
+                diag1+=prub[j][i];
             }
             if(diag!=cumplir || diag1!=cumplir){
                 return false;
@@ -159,12 +159,16 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
     public Accion[] acciones(Estado es) {//optimizamos el generar acciones
         int x=0,y=0;
         boolean encontrado=false;
+        int cnt=0;
         EstadoCuadrado esAs= (EstadoCuadrado) es;
         ArrayList<AccionCuadrado> accs= new ArrayList<>();
         int [][] estado= esAs.estado;
         int form= (int) (estado.length*(Math.pow(estado.length,2)+1))/2;
         int lim= (int)Math.pow(estado.length,2);
         int cntfil=0, cntcol=0;
+        int diag=0,diag1=0;
+        int cnt0fil=0,cnt0col=0;
+        int z= estado.length;
         for(int i=0;i<estado.length;i++){
             for(int j=0;j< estado[i].length;j++){
                 if(estado[i][j]==0 && !encontrado){
@@ -178,15 +182,65 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
         if(!encontrado){
             return new Accion[0];
         }else{
-            for(int i=0;i< estado.length;i++){
-                cntfil+=estado[x][i];
-                cntcol+=estado[i][y];
+
+
+        for(int i=0;i<estado.length;i++){
+            diag+=estado[i][i];
+            if(estado[i][i]!=0){
+                cnt++;
+            }
+        }
+        if((diag!=form && cnt==estado.length) || diag>form){
+            return new Accion[0];
+        }
+        cnt=0;
+        diag=0;
+        for(int i=0;i<estado.length;i++){
+            if(z>0){
+                z--;
             }
 
-            for (int i = 1; i <= lim && i<=(form-cntfil) && i<=(form-cntcol); i++) {//tenemos como condicion que el limite sea menor que lo que falta para completar la fila/columna
-                if(!contiene(estado,i)) {//miramos que no se repita ningun numero en la matriz
-                    AccionCuadrado acc=new AccionCuadrado(x, y, i);
-                    if(acc.esAplicable(es))
+            diag+=estado[z][i];
+           if(estado[z][i]!=0){
+                cnt++;
+            }
+
+        }
+        if((diag!=form && cnt==estado.length) || diag>form){
+            return new Accion[0];
+        }
+
+        for(int i=0;i<estado.length;i++){
+            diag=0;
+            diag1=0;
+            cnt0fil=0;
+            cnt0col=0;
+            for(int j=0;j<estado[i].length;j++){
+                if(0>estado[i][j] || estado[i][j]>lim){
+                    return new Accion[0];
+                }
+                diag+=estado[i][j];
+                diag1+=estado[j][i];
+                if(estado[i][j]==0){
+                    cnt0fil++;
+                }
+                if(estado[j][i]==0){
+                    cnt0col++;
+                }
+
+            }
+            if((diag!=form && cnt0fil==0) || (diag1!=form && cnt0col==0)){
+                return new Accion[0];
+            }
+        }
+        for(int i=0;i< estado.length;i++){
+            cntfil+=estado[x][i];
+            cntcol+=estado[i][y];
+        }
+        for (int i = 1; i <= lim && i<=(form-cntfil) && i<=(form-cntcol); i++) {//tenemos como condicion que el limite sea menor que lo que falta para completar la fila/columna
+            if(!contiene(estado,i)) {//miramos que no se repita ningun numero en la matriz
+                AccionCuadrado acc=new AccionCuadrado(x, y, i);
+                if(acc.esAplicable(es))
                     accs.add(acc);
                 }
             }
