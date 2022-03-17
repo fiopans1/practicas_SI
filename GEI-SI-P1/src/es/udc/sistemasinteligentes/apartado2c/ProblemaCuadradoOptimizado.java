@@ -169,6 +169,7 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
         int diag=0,diag1=0;
         int cnt0fil=0,cnt0col=0;
         int z= estado.length;
+        //buscamos una casilla en vacia para rellenar
         for(int i=0;i<estado.length;i++){
             for(int j=0;j< estado[i].length;j++){
                 if(estado[i][j]==0 && !encontrado){
@@ -183,7 +184,7 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
             return new Accion[0];
         }else{
 
-
+        //miramos que las dos diagonales sean validas, sino lo son no devolvemos aciones de este estado
         for(int i=0;i<estado.length;i++){
             diag+=estado[i][i];
             if(estado[i][i]!=0){
@@ -209,7 +210,7 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
         if((diag!=form && cnt==estado.length) || diag>form){
             return new Accion[0];
         }
-
+        //miramos que las filas y columnas sean validas, sino lo son no devolvemos aciones de este estado
         for(int i=0;i<estado.length;i++){
             diag=0;
             diag1=0;
@@ -240,10 +241,11 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
         for (int i = 1; i <= lim && i<=(form-cntfil) && i<=(form-cntcol); i++) {//tenemos como condicion que el limite sea menor que lo que falta para completar la fila/columna
             if(!contiene(estado,i)) {//miramos que no se repita ningun numero en la matriz
                 AccionCuadrado acc=new AccionCuadrado(x, y, i);
-                if(acc.esAplicable(es))
+                if(acc.esAplicable(es)) {//miramos si es aplicable la accion
                     accs.add(acc);
                 }
             }
+        }
             Accion[] accs1= new Accion[accs.size()];
             accs.toArray(accs1);
             return accs1;
