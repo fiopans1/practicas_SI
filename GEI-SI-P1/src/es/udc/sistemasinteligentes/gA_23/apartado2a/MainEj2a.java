@@ -1,6 +1,6 @@
-package es.udc.sistemasinteligentes.apartado2a;
+package es.udc.sistemasinteligentes.gA_23.apartado2a;
 
-import es.udc.sistemasinteligentes.*;
+import es.udc.sistemasinteligentes.gA_23.*;
 
 public class MainEj2a {
     public static void main(String[] args) throws Exception {
@@ -9,8 +9,8 @@ public class MainEj2a {
         ProblemaBusqueda cuadradoMagico = new ProblemaCuadradoMagico(estadoInicial);//creamos un nuevo problema busqueda con nuestro estado inicial
 
         //comenta y descomenta la que quieras usar:
-        EstrategiaBusqueda buscador = new EstrategiaAmplitud();//busqueda en amplitud
-        //EstrategiaBusqueda buscador = new EstrategiaProfundidad();//busqueda en profundidad
+        //EstrategiaBusqueda buscador = new EstrategiaAmplitud();//busqueda en amplitud
+        EstrategiaBusqueda buscador = new EstrategiaProfundidad();//busqueda en profundidad
 
         Nodo[] nodos = buscador.soluciona(cuadradoMagico);
         for (Nodo n : nodos) {//imprimimos los nodos que recorrimos

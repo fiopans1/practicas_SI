@@ -1,8 +1,8 @@
-package es.udc.sistemasinteligentes.apartado2c;
+package es.udc.sistemasinteligentes.gA_23.apartado2c;
 
-import es.udc.sistemasinteligentes.Accion;
-import es.udc.sistemasinteligentes.Estado;
-import es.udc.sistemasinteligentes.ProblemaBusqueda;
+import es.udc.sistemasinteligentes.gA_23.Accion;
+import es.udc.sistemasinteligentes.gA_23.Estado;
+import es.udc.sistemasinteligentes.gA_23.ProblemaBusqueda;
 
 import java.util.ArrayList;
 import java.util.Objects;

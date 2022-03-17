@@ -1,6 +1,4 @@
-package es.udc.sistemasinteligentes;
-
-import es.udc.sistemasinteligentes.ejemplo.ProblemaAspiradora;
+package es.udc.sistemasinteligentes.gA_23;
 
 import java.util.ArrayList;
 import java.util.Objects;

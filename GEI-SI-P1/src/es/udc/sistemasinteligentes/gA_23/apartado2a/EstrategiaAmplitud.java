@@ -1,6 +1,6 @@
-package es.udc.sistemasinteligentes.apartado2a;
+package es.udc.sistemasinteligentes.gA_23.apartado2a;
 
-import es.udc.sistemasinteligentes.*;
+import es.udc.sistemasinteligentes.gA_23.*;
 
 import java.util.ArrayList;
 

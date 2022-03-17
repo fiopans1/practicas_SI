@@ -1,9 +1,8 @@
-package es.udc.sistemasinteligentes.ejemplo;
+package es.udc.sistemasinteligentes.gA_23.ejemplo;
 
-import es.udc.sistemasinteligentes.Accion;
-import es.udc.sistemasinteligentes.Estado;
-import es.udc.sistemasinteligentes.ProblemaBusqueda;
-import es.udc.sistemasinteligentes.Nodo;
+import es.udc.sistemasinteligentes.gA_23.Accion;
+import es.udc.sistemasinteligentes.gA_23.Estado;
+import es.udc.sistemasinteligentes.gA_23.ProblemaBusqueda;
 
 
 import java.util.ArrayList;
