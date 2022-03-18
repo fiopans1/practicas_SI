@@ -1,6 +1,6 @@
-package es.udc.sistemasinteligentes.gA_23.ejemplo;
+package es.udc.sistemasinteligentes.gA_23_1.ejemplo;
 
-import es.udc.sistemasinteligentes.gA_23.*;
+import es.udc.sistemasinteligentes.gA_23_1.*;
 
 import java.util.ArrayList;
 

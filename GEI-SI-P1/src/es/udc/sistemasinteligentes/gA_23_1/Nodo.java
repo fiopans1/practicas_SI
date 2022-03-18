@@ -1,7 +1,6 @@
-package es.udc.sistemasinteligentes.gA_23;
+package es.udc.sistemasinteligentes.gA_23_1;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Nodo implements Comparable<Nodo>{
     private final Estado estado;

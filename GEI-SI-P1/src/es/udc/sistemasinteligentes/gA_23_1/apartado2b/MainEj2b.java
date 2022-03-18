@@ -1,7 +1,7 @@
-package es.udc.sistemasinteligentes.gA_23.apartado2b;
+package es.udc.sistemasinteligentes.gA_23_1.apartado2b;
 
-import es.udc.sistemasinteligentes.gA_23.*;
-import es.udc.sistemasinteligentes.gA_23.apartado2a.*;
+import es.udc.sistemasinteligentes.gA_23_1.*;
+import es.udc.sistemasinteligentes.gA_23_1.apartado2a.*;
 
 public class MainEj2b {
     public static void main(String[] args) throws Exception {

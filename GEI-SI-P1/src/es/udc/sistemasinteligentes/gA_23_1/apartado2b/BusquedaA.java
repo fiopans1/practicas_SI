@@ -1,6 +1,6 @@
-package es.udc.sistemasinteligentes.gA_23.apartado2b;
+package es.udc.sistemasinteligentes.gA_23_1.apartado2b;
 
-import es.udc.sistemasinteligentes.gA_23.*;
+import es.udc.sistemasinteligentes.gA_23_1.*;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;

@@ -1,8 +1,8 @@
-package es.udc.sistemasinteligentes.gA_23.apartado2b;
+package es.udc.sistemasinteligentes.gA_23_1.apartado2b;
 
-import es.udc.sistemasinteligentes.gA_23.Estado;
-import es.udc.sistemasinteligentes.gA_23.Heuristica;
-import es.udc.sistemasinteligentes.gA_23.apartado2a.ProblemaCuadradoMagico.*;
+import es.udc.sistemasinteligentes.gA_23_1.Estado;
+import es.udc.sistemasinteligentes.gA_23_1.Heuristica;
+import es.udc.sistemasinteligentes.gA_23_1.apartado2a.ProblemaCuadradoMagico.*;
 
 public class HeuristicaCuadradoMagico extends Heuristica {//mañana buscar una que sea decente
     private boolean contiene(int[][] arr, int z){//funcion auxiliar para ver si z esta en arr

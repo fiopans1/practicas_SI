@@ -1,22 +1,19 @@
-package es.udc.sistemasinteligentes.gA_23.apartado2c;
-
-import es.udc.sistemasinteligentes.gA_23.Accion;
-import es.udc.sistemasinteligentes.gA_23.Estado;
-import es.udc.sistemasinteligentes.gA_23.ProblemaBusqueda;
+package es.udc.sistemasinteligentes.gA_23_1.apartado2a;
+import es.udc.sistemasinteligentes.gA_23_1.*;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
-    //es igual al del 2a menos el Accion[] de ProblemaBusqueda que es donde hacemos los cambios!
-    public static class EstadoCuadrado extends Estado {
-        private final int [][] estado;
+public class ProblemaCuadradoMagico extends ProblemaBusqueda{
+    public static class EstadoCuadrado extends Estado{
+        private final int [][] estado;//para implementar el estado de manera interna usamos una matriz que pasaremos como
+                                        //parametro del constructor
         public EstadoCuadrado(int [][] estado){
             this.estado=estado;
 
         }
         @Override
-        public String toString() {
+        public String toString() {//imprimimos la matriz
             StringBuilder sol=new StringBuilder();
             sol.append("\n");
             for(int i=0;i<estado.length;i++){
@@ -30,12 +27,12 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
             return sol.toString();
         }
 
-        public int[][] getEstado() {
+        public int[][] getEstado() {//devuelve la matriz
             return estado;
         }
 
         @Override
-        public boolean equals(Object o) {
+        public boolean equals(Object o) {//compara una matriz con otra
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             EstadoCuadrado that = (EstadoCuadrado) o;
@@ -52,10 +49,10 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
         @Override
         public int hashCode() {
             return Objects.hash(estado);
-        }
+        }//devuelve un hashcode en funcion de la matriz
     }
-    public static class AccionCuadrado extends Accion {
-        private int x,y,valor;
+    public static class AccionCuadrado extends Accion{
+        private final int x,y,valor;//para aplicar la accion simplemente nos quedamos co las coordenadas x,y y el
         public AccionCuadrado(int x,int y,int valor){
             this.x=x;
             this.y=y;
@@ -67,7 +64,7 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
         }
 
         @Override
-        public boolean esAplicable(Estado es) {
+        public boolean esAplicable(Estado es) {//miramos si es aplicable el estado(si la casilla donde vamos a meter el numero está a 0)
             EstadoCuadrado esAs= (EstadoCuadrado)es;
             if(esAs.estado[x][y]!=0){
                 return false;
@@ -77,7 +74,7 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
         }
 
         @Override
-        public Estado aplicaA(Estado es) {
+        public Estado aplicaA(Estado es) {//aplica el estado, primero haciendo una copia del estado actual(sino solo modificamos el actual) y modifica la copia
             EstadoCuadrado esAs= (EstadoCuadrado)es;
             int[][] estado= esAs.estado;
             int [][] est= new int[estado.length][estado.length];
@@ -91,20 +88,20 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
         }
     }
 
-    public ProblemaCuadradoOptimizado(Estado estadoInicial) {
+    public ProblemaCuadradoMagico(Estado estadoInicial) {
         super(estadoInicial);
-    }
+    }//constructor del problema
 
 
     @Override
-    public boolean esMeta(Estado es) {
+    public boolean esMeta(Estado es) {//comprobamos si una matriz es meta
         EstadoCuadrado esAs= (EstadoCuadrado)es;
         int [][] prub= esAs.estado;
         int diag=0,diag1=0;
         int cumplir=(((prub.length)*(prub.length*prub.length+1))/2);
         int z=prub.length;
         int limit= (int)Math.pow(prub.length,2);
-        for(int i=0;i<prub.length;i++){
+        for(int i=0;i<prub.length;i++){//miramos que cada diagonal sume lo que tiene que dar
             diag+=prub[i][i];
         }
         if(diag!=cumplir){
@@ -122,7 +119,7 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
             return false;
         }
 
-        for(int i=0;i<prub.length;i++){
+        for(int i=0;i<prub.length;i++){//miramos que cada uno de las filas y las columnas sume lo que tiene que dar
             diag=0;
             diag1=0;
             for(int j=0;j<prub[i].length;j++){
@@ -136,16 +133,15 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
                 return false;
             }
         }
-        for(int i=1;i<=(prub.length* prub.length);i++){
+        for(int i=1;i<=(prub.length* prub.length);i++){//miramos que la matriz contenga todos los numeros de 1 a N^2(con lo que tambien nos aseguramos que no repita)
             if(!contiene(prub,i)){
                 return false;
             }
         }
 
-
         return true;
     }
-    private boolean contiene(int[][] arr, int z){
+    private boolean contiene(int[][] arr, int z){//funcion auxiliar
         for(int i=0;i<arr.length;i++){
             for(int j=0; j<arr[i].length;j++){
                 if(arr[i][j]==z){
@@ -156,21 +152,14 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
         return false;
     }
     @Override
-    public Accion[] acciones(Estado es) {//optimizamos el generar acciones
+    public Accion[] acciones(Estado es) {//generamos las acciones posibles buscando la primera posicion en blanco y rellenando con todos los numeros de 1 a N^2
         int x=0,y=0;
         boolean encontrado=false;
-        int cnt=0;
         EstadoCuadrado esAs= (EstadoCuadrado) es;
         ArrayList<AccionCuadrado> accs= new ArrayList<>();
         int [][] estado= esAs.estado;
-        int form= (int) (estado.length*(Math.pow(estado.length,2)+1))/2;
         int lim= (int)Math.pow(estado.length,2);
-        int cntfil=0, cntcol=0;
-        int diag=0,diag1=0;
-        int cnt0fil=0,cnt0col=0;
-        int z= estado.length;
-        //buscamos una casilla en vacia para rellenar
-        for(int i=0;i<estado.length;i++){
+        for(int i=0;i< estado.length;i++){
             for(int j=0;j< estado[i].length;j++){
                 if(estado[i][j]==0 && !encontrado){
                     x=i;
@@ -183,74 +172,16 @@ public class ProblemaCuadradoOptimizado extends ProblemaBusqueda {
         if(!encontrado){
             return new Accion[0];
         }else{
-
-        //miramos que las dos diagonales sean validas, sino lo son no devolvemos aciones de este estado
-        for(int i=0;i<estado.length;i++){
-            diag+=estado[i][i];
-            if(estado[i][i]!=0){
-                cnt++;
-            }
-        }
-        if((diag!=form && cnt==estado.length) || diag>form){
-            return new Accion[0];
-        }
-        cnt=0;
-        diag=0;
-        for(int i=0;i<estado.length;i++){
-            if(z>0){
-                z--;
-            }
-
-            diag+=estado[z][i];
-           if(estado[z][i]!=0){
-                cnt++;
-            }
-
-        }
-        if((diag!=form && cnt==estado.length) || diag>form){
-            return new Accion[0];
-        }
-        //miramos que las filas y columnas sean validas, sino lo son no devolvemos aciones de este estado
-        for(int i=0;i<estado.length;i++){
-            diag=0;
-            diag1=0;
-            cnt0fil=0;
-            cnt0col=0;
-            for(int j=0;j<estado[i].length;j++){
-                if(0>estado[i][j] || estado[i][j]>lim){
-                    return new Accion[0];
-                }
-                diag+=estado[i][j];
-                diag1+=estado[j][i];
-                if(estado[i][j]==0){
-                    cnt0fil++;
-                }
-                if(estado[j][i]==0){
-                    cnt0col++;
-                }
-
-            }
-            if((diag!=form && cnt0fil==0) || (diag1!=form && cnt0col==0)){
-                return new Accion[0];
-            }
-        }
-        for(int i=0;i< estado.length;i++){
-            cntfil+=estado[x][i];
-            cntcol+=estado[i][y];
-        }
-        for (int i = 1; i <= lim && i<=(form-cntfil) && i<=(form-cntcol); i++) {//tenemos como condicion que el limite sea menor que lo que falta para completar la fila/columna
-            if(!contiene(estado,i)) {//miramos que no se repita ningun numero en la matriz
-                AccionCuadrado acc=new AccionCuadrado(x, y, i);
-                if(acc.esAplicable(es)) {//miramos si es aplicable la accion
+            for(int i=1;i<= lim;i++){
+                AccionCuadrado acc=new AccionCuadrado(x,y,i);
+                if(acc.esAplicable(es)) {
                     accs.add(acc);
                 }
             }
         }
-            Accion[] accs1= new Accion[accs.size()];
-            accs.toArray(accs1);
-            return accs1;
-        }
+        Accion[] accs1= new Accion[accs.size()];
+        accs.toArray(accs1);
+        return accs1;
     }
 
 }
-

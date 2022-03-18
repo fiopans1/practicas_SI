@@ -1,5 +1,5 @@
-package es.udc.sistemasinteligentes.gA_23.apartado2c;
-import es.udc.sistemasinteligentes.gA_23.*;
+package es.udc.sistemasinteligentes.gA_23_1.apartado2a;
+import es.udc.sistemasinteligentes.gA_23_1.*;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -7,21 +7,23 @@ import java.util.Stack;
 public class EstrategiaProfundidad implements EstrategiaBusqueda {
 
     @Override
-    public Nodo[] soluciona(ProblemaBusqueda p) throws Exception {//exactamente la misma que en el 2a
+    public Nodo[] soluciona(ProblemaBusqueda p) throws Exception {//implementamos la busqueda por profundidad vista en clase
+        //creamos una Pila para frontera y una lista de estados para explorados
         Stack<Nodo> Frontera = new Stack<>();
-        int i = 0;
         ArrayList<Estado> Explorados = new ArrayList<>();
+        //declaramos otras variables
+        int i = 0;
         Nodo nodoActual = new Nodo(p.getEstadoInicial(), null, null);
         Frontera.add(nodoActual);
         Estado S=null;
         while (!Frontera.empty()) {
-            nodoActual = Frontera.pop();
+            nodoActual = Frontera.pop();//sacamos el primer elemento de la pila y lo eliminamos
             S = nodoActual.getEstado();
             System.out.println((i++) + " - Estado actual cambiado a " + nodoActual.getEstado());
-            if (p.esMeta(S)) {
+            if (p.esMeta(S)) {//miramos si el estado actual es meta
                 System.out.println((i++) + " - FIN - " + nodoActual.getEstado());
                 return Nodo.reconstruyeSolucion(nodoActual);
-            } else {
+            } else {//si el estado no es meta generamos sucesores y miramos si se añaden a frontera o no
                 System.out.println((i++) + " - " + nodoActual.getEstado() + " no es meta");
                 Explorados.add(nodoActual.getEstado());
                 Accion[] acc = p.acciones(S);
@@ -40,7 +42,7 @@ public class EstrategiaProfundidad implements EstrategiaBusqueda {
                             }
                         }
                     }
-                    if (!pertenece) {
+                    if (!pertenece) {//sino esta en explorados ni en frontera entonces añadimos ese nodo a frontera
                         System.out.println((i++) + " - " + h.getEstado() + " NO explorado");
                         Frontera.add(h);
                     }

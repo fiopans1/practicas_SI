@@ -1,6 +1,6 @@
-package es.udc.sistemasinteligentes.gA_23.apartado2c;
+package es.udc.sistemasinteligentes.gA_23_1.apartado2c;
 
-import es.udc.sistemasinteligentes.gA_23.*;
+import es.udc.sistemasinteligentes.gA_23_1.*;
 
 
 public class MainEj2c {
